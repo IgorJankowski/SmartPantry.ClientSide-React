@@ -1,11 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'
-import ProductsList from '../components/ProductsList/ProductsList'
-import { useEffect, useState } from 'react'
-import { listProducts } from '../dataServices/inventoryApi'
+import { createFileRoute } from "@tanstack/react-router";
+import ProductsList from "../components/ProductsList/ProductsList";
+import { useEffect, useState } from "react";
+import { listProducts } from "../dataServices/inventoryApi";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: Index,
-})
+});
 
 function Index() {
   const [products, setProducts] = useState([]);
@@ -17,12 +17,12 @@ function Index() {
 
   useEffect(() => {
     fetchProducts();
-  }, [])
+  }, []);
 
   return (
     <main>
-    <div>
-      <div className="mb-4">
+      <div>
+        {/* <div className="mb-4">
         <span>top bar with product search and maybe recipe search? or that may be a diff view</span>
       </div>
 
@@ -45,9 +45,9 @@ function Index() {
           In future there may be feature to add calories intake(fitness app feat) and suggestions of
           menu to fit your macro and cal needs
         </span>
+      </div> */}
       </div>
-    </div>
-    <ProductsList products={products}></ProductsList> 
-  </main>
-  )
+      <ProductsList products={products}></ProductsList>
+    </main>
+  );
 }
