@@ -2,18 +2,24 @@ import { createFileRoute } from "@tanstack/react-router";
 import ProductsList from "../components/ProductsList/ProductsList";
 import { useEffect, useState } from "react";
 import { listProducts } from "../dataServices/inventoryApi";
+import type { ProductDto } from "../models/ProductDto";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductDto[]>([]);
 
   const fetchProducts = async () => {
     const res = await listProducts();
     setProducts(res);
   };
+
+  async function handleProductAdded(newProduct: ProductDto) {
+    setProducts([...products, newProduct]);
+    await fetchProducts();
+  }
 
   useEffect(() => {
     fetchProducts();
@@ -47,7 +53,12 @@ function Index() {
         </span>
       </div> */}
       </div>
-      <ProductsList products={products}></ProductsList>
+      <ProductsList
+        products={products}
+        onProductAdded={handleProductAdded}
+        // onProductUpdated={handleProductUpdated}
+        // onProductDeleted={handleProductDeleted}
+      />
     </main>
   );
 }

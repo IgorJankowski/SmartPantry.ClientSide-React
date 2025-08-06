@@ -8,7 +8,7 @@ export class ProductDto extends ProductFormModel {
     name: string,
     quantity: number,
     description?: string,
-    category?: string
+    category?: number
   ) {
     super(name, quantity, description, category);
     this.id = id;
